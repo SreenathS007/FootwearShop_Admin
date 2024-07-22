@@ -20,7 +20,7 @@ class HomeController extends GetxController {
 
   List<Product> products = [];
   @override
-  void onInit() async {
+  Future<void> onInit() async {
     //using this colliction we can add delete remove, update...
     productCollection = firestore.collection('Products');
     await fetchProducts();
@@ -71,6 +71,8 @@ class HomeController extends GetxController {
       // } else {
       //   print('Unknown error: $e');
       // }
+    } finally {
+      update();
     }
   }
 
@@ -94,5 +96,6 @@ class HomeController extends GetxController {
     category = 'General';
     brand = 'Unbranded';
     offer = false;
+    update();
   }
 }
